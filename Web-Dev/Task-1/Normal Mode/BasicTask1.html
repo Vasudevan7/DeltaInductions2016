@@ -1,0 +1,93 @@
+<html>
+<head> 
+<title>BasicTask 1 </title>
+<style>
+body
+{ background-image: url("Rolling Reels.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
+  background-color:brown;
+  text-align:center;
+  font-size: 20;
+}
+#r
+{ font-size:30;
+  margin: 80px 200px 50px 500px;
+}
+#days
+{ border: solid 2px navy;
+  margin: 50px 50px 0px 600px;
+  width:100px;
+  height:100px; 
+  text-align: center;
+}
+#hours
+{ border: solid 2px navy;
+  margin: -104px 50px 0px 750px;
+  width:100px;
+  height:100px;
+  text-align: center;
+}
+#minutes
+{ border: solid 2px navy;
+  margin: -104px 50px 0px 900px;
+  width:100px;
+  height:100px;
+  text-align: center;
+}
+#seconds
+{ border: solid 2px navy;
+  margin: -104px 50px 0px 1050px;
+  width:100px;
+  height:100px;
+  text-align: center;
+}
+ 
+</style>
+</head>
+<body id="b">
+<script>
+<!--
+   var n,t,day,hour,minutes,seconds,ms
+   var target= new Date(2016,5,17,0,0,0,0)
+   var z=setInterval(cal,1000)
+   var tar=target.getTime()
+   function cal()
+   { var now= new Date()
+     n=now.getTime()
+     t=tar-n
+     if(t<=0)
+      document.getElementById("b").innerHTML="Registrations Closed" ;
+    else
+    {
+     ms=t%1000
+     t=t-ms
+     t=t/1000
+     seconds=t%60
+     t=t-seconds
+     t/=60
+     minutes=t%60
+     t=t-minutes
+     t=t/60
+     hour=t%24
+     t=t-hour
+     day=t/24
+     document.getElementById("d").innerHTML=day
+     document.getElementById("h").innerHTML=hour
+     document.getElementById("m").innerHTML=minutes
+     document.getElementById("s").innerHTML=seconds
+     }      
+     
+     
+    }
+//-->
+
+</script>
+<p id="r">Registrations OPEN<br><br><br><br><br>Registration Time ends in:<br></p>
+<div id="days"><br>Days <br><p id="d"></p></div>
+<div id="hours"><br>Hours<br><p id="h"></p></div>
+<div id="minutes"><br>Minutes<br><p id="m"></p></div>
+<div id="seconds"><br>Seconds<br><p id="s"></p></div>
+</body>
+</html>

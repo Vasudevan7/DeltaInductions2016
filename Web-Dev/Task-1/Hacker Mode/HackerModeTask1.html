@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>HackerMode</title>
+<style>
+body
+{ color: black;
+  background-color: red;
+  text-align:center;
+  font-size: 32;
+}
+button
+{ margin: 80px;
+  font-size:30;
+  color: brown; 
+}
+.time
+{ background-color: darkblue;
+  color: white;
+  border-radius: 10px;
+  width:100px;
+  height:100px;
+  font-size:50;
+  text-align:center; 
+  
+}
+#days
+{ border: solid 4px red;
+  margin: 100px 100px 0px 100px;
+  width:200px;
+  height:200px; 
+  text-align: center;
+}
+#hours
+{ border: solid 4px red;
+  margin: -208px 100px 0px 400px;
+  width:200px;
+  height:200px;
+  text-align: center;
+}
+#minutes
+{ border: solid 4px red;
+  margin: -208px 100px 0px 700px;
+  width:200px;
+  height:200px;
+  text-align: center;
+}
+#seconds
+{ border: solid 4px red;
+  margin: -208px 100px 0px 1000px;
+  width:200px;
+  height:200px;
+  text-align: center;
+}
+ 
+</style>
+</head>
+<body>
+<script>
+<!--
+   
+   var z,t,days,hours,minutes,seconds,j,day,hour,minute,second
+   var c=0   
+   //c- no of clicks of start/stop button (used as a flag)
+   //days,hours,minutes,seconds-used to store the reset value
+   //day,hour,minute,second-used for manipulation
+   function start1()
+   { if(c==0)
+       { days=document.getElementById("d").value
+         hours=document.getElementById("h").value
+         minutes=document.getElementById("m").value
+         seconds=document.getElementById("s").value 
+         }
+      if(c%2==0)
+      { c++
+        document.getElementById("b1").innerHTML="STOP"
+        day=document.getElementById("d").value
+        hour=document.getElementById("h").value
+        minute=document.getElementById("m").value
+        second=document.getElementById("s").value
+        j=(day*86400)+(hour*3600)+(minute*60)+(second*1)
+        z=setInterval(time1,1000)
+        function time1()
+        { t=j 
+          second=t%60
+          t=t-second
+          t/=60
+          minute=t%60
+          t=t-minute
+          t=t/60
+          hour=t%24
+          t=t-hour
+          day=t/24
+          document.getElementById("d").value=day
+          document.getElementById("h").value=hour
+          document.getElementById("m").value=minute
+          document.getElementById("s").value=second
+          j--
+          }
+         }
+       else
+        { c++
+          clearInterval(z)
+          document.getElementById("b1").innerHTML="START"
+         }
+    }
+    function reset1()
+    { c=0
+      clearInterval(z)
+      document.getElementById("b1").innerHTML="START"
+      document.getElementById("d").value=days
+      document.getElementById("h").value=hours
+      document.getElementById("m").value=minutes
+      document.getElementById("s").value=seconds
+      }    
+//-->
+
+</script>
+<p><strong>COUNTDOWN TIMER</strong></p>
+<form>
+<div id="days">   <br>Days   <br><br><input id="d" class="time" type="number" name="day1"     value="0" step="1" min="0"></div>
+<div id="hours">  <br>Hours  <br><br><input id="h" class="time" type="number" name="hours1"   value="0" step="1" min="0" max="23"></div>
+<div id="minutes"><br>Minutes<br><br><input id="m" class="time" type="number" name="minutes1" value="0" step="1" min="0" max="59"></div>
+<div id="seconds"><br>Seconds<br><br><input id="s" class="time" type="number" name="seconds1" value="0" step="1" min="0" max="59"></div>
+<button id="b1" type="button" name="start" onclick="start1()">START</button>
+<button id="b2" type="button" name="reset" onclick="reset1()">RESET</button>
+</form>
+</body>
+</html>
