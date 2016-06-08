@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Projectile</title>
+<style>
+body
+{ background-color: brown;
+  }
+#sc
+{ border:solid yellow 2px;
+  height: 100px;
+  width:  100px;
+  margin: -500px 0px 0px 1200px;
+  }
+#info
+{ border:solid yellow 2px;
+  height: 125px;
+  width:  150px;
+  margin: 350px 0px 0px 100px;
+  color: navy;
+  padding-left: 10px;
+  }
+#b1
+{ background-color: blue;
+  width: 100px
+  height: 40px;
+  margin: 25px 0px 0px 600px;
+  font-size: 30;
+ }
+#xvel,#yvel
+{ background-color: green;
+  color: black;
+  height: 30px;
+  width: 200px;
+  margin: 0px 200px 0px 250px;
+ }
+#box
+{ margin:100px;
+  border-bottom:solid navy 2px;
+  border-left:solid navy 2px;
+  height: 400px;
+  width:  1000px;
+  position: relative;
+}
+#ball
+ { border-radius: 50px;
+   background-color: yellow;
+   width:  10px;
+   height: 10px;
+   position: absolute;
+   bottom: 0px;
+   }
+</style>
+</head>
+<body>
+<script>
+<!--
+var i,b,x,u,v,ra,h,tf,w,f,he;
+var r=0;
+var s=0;
+var t=0; 
+function onclick1()
+{ u=document.getElementById("xvel").value;
+  v=document.getElementById("yvel").value;
+  document.getElementById("a").innerHTML=v;
+  i=document.getElementById("ball");
+  h=(v*v)/20
+  tf=v/5
+  ra=(u*v)/5
+  f=10
+  w=ra*10
+  he=h*10
+  if(w>1000&&he>400)
+   { f=1000/ra;
+     b=400/h;
+     if(b<f) f=b;
+     }
+  else
+  { if(w>1000)  f=1000/ra;
+    else if(he>400) f=400/h;
+    }
+  document.getElementById("a").innerHTML=f;
+  document.getElementById("b").innerHTML=f;
+  i.style.left='0px';
+  i.style.bottom='0px';
+  document.getElementById("h").innerHTML=h;
+  document.getElementById("tf").innerHTML=tf;
+  document.getElementById("ra").innerHTML=ra;
+  b=setInterval(z,1);
+  }
+function z()
+{ t+=0.001;
+  x=u*t;
+  y=v*t-((4.9)*t*t);
+  r=(x*f);
+  s=(y*f);
+  if(t>=tf) 
+     clearInterval(b);
+  i.style.left=r+'px';
+  i.style.bottom=s+'px';
+}
+//-->
+</script>
+<p align="center" style="font-size:40"><strong> PROJECTILE </strong></p>
+<form>
+<input id="xvel" type="text" value="" placeholder="Enter X velocity">
+<input id="yvel" type="text" value="" placeholder="Enter Y velocity">
+<br /><button id="b1" type="button" value="Submit" onclick="onclick1()" >Throw</button>
+</form>
+<div id="box">
+<p id="ball"></p>
+</div>
+<p id="sc">Scale:<br />X-axis:<a id="a"></a>px=1m<br />Y-axis:<a id="b"></a>px=1m</p>
+<div id="info">
+<p>Max. height = <a id="h"></a>m</p>
+<p>Flight Time = <a id="tf"></a>sec</p>
+<p>Range       = <a id="ra"></a>m</p>
+</div>
+</body>
+</html>
