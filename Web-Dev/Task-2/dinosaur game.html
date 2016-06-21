@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>Dinosaur game</title>
+<style>
+body
+{ background-color: dimgrey;
+  }
+div
+{ background-color: blue;
+  color: firebrick;
+  margin-bottom: 25px;
+  }
+#s
+{   margin-top: 25px;
+  }
+.btn
+{ height: 40px;
+  width: 100px;
+  left: 20px; 
+  background-color: blue;  
+    }
+</style>
+</head>
+<body onkeyup="jumpc(event)">
+    <center>
+<div><font size="36">DINOSAUR GAME</font></div>        
+<canvas id="can" height="400px" width="1000px" style="border:1px solid navy" align="center"></canvas>  
+<script>
+<!--
+    
+var k,r=375,t1=0,s1,s2,s3,s4,j,no_obs=0,l1,l2,z,c=0,fkeypr=0,fpause=0,y,o=0,s=0,p=0,sc=0,fsc=0,ro=0; 
+var i,ico;                                                              //fkeypr-flag for keys pressed
+var b,b1,b2,b3,b4,d=0;                                                      //fpause-flag for pause(1-pause)
+var arrwo=[5,8,10,12,15];
+var arrho=[350,325,375,300];
+var memwo=[],memho=[],memw=[]; 
+function obsvalues()
+{  j=parseInt(Math.random()*4000)%5;
+   memwo[no_obs]=arrwo[j];
+   j=parseInt(Math.random()*400)%4;
+   memho[no_obs]=arrho[j];
+   memw[no_obs]=950;
+   no_obs++;
+  }    
+i=document.getElementById("can");
+ico=i.getContext("2d");  
+    
+
+function obscreate(z)
+{   ico.beginPath();
+    ico.lineCap="round";
+    ico.lineWidth= memwo[z];
+    ico.moveTo(memw[z],400);
+    ico.lineTo(memw[z],memho[z]);
+    ico.strokeStyle= "#000000";
+    ico.stroke();
+    ico.closePath();
+  }
+function obs()
+{   s2=setInterval(obsmove,75);
+  
+}
+function obsmove()
+{ if(s==p) clearInterval(s2);
+  canscreen();
+  c++;
+  if(c>=75) c=75;
+  d=parseInt((c/25)+1);
+  for(l1=0;l1<d;l1++)
+    {  memw[l1]-=10;
+       if(memw[0]<0)
+        { for(l2=0;l2<no_obs-1;l2++)
+            { memwo[l2]=memwo[l2+1];
+              memho[l2]=memho[l2+1];    
+              memw[l2]=memw[l2+1];      
+               }
+           memwo[no_obs-1]=0;
+           memho[no_obs-1]=0;    
+           memw[no_obs-1]=0;
+           no_obs--;
+           obsvalues();
+           fsc=0;
+          }
+       if(memw[0]<70&&fsc==0)
+       { sc+=20;
+         document.getElementById("score").innerHTML=sc;
+         fsc=1;
+         }
+        obscreate(l1);
+     }
+ }   
+function canscreen()
+{  ico.fillStyle= "#00FF00";
+   ico.fillRect(0,0,1000,400);
+   if(s>p&&fkeypr==0) drawc(375);
+  }    
+function start1()
+{  s++;
+   document.getElementById("btns").disabled= true;
+   document.getElementById("btnp").disabled= false;
+   canscreen();
+   if(s>p&&s!=1&&fkeypr==1)
+     { s1=setInterval(balljump,50);
+       }
+   obs();
+  }
+function init()
+{ 
+   for(l2=0;l2<4;l2++)
+     { obsvalues();
+       } 
+   document.getElementById("btnp").disabled= true;
+   ico.fillStyle="#00FF00";
+   ico.fillRect(0,0,500,400);
+   drawc(375);
+   s3=setInterval(check,25);
+}
+function pause()
+{ p++;
+  document.getElementById("btns").disabled= false;
+  document.getElementById("btnp").disabled= true;  
+  }
+
+function jumpc(event)
+{  k=event.keyCode;
+   if(k==38&&fkeypr==0&&s>p)
+       {   fkeypr++;
+           s1=setInterval(balljump,50);
+          }
+   }
+function drawc(y)
+{ 
+  ico.beginPath();
+  ico.arc(100,y,25,0,2*Math.PI);
+  ico.fillStyle="#FF0012";
+  ico.fill();
+  ico.closePath(); 
+  }
+function balljump()
+{  if(p==s) clearInterval(s1);
+   t1++;
+   r=375-20*t1;   
+   if(t1>10) 
+    r=20*t1-25;
+   drawc(r); 
+   if(t1>=20)
+    {  t1=0;
+       clearInterval(s1);
+       fkeypr=0;
+      }
+  }
+function check()
+{ b1=r-memho[0];
+  b2=memw[0]-100;
+  b3=Math.pow(b1,2)+Math.pow(b2,2);
+  b4=Math.sqrt(b3);
+  if((b4<25)||(fkeypr==0&&memw[0]<126&&memw[0]>74)) 
+    { clearInterval(s1);
+      clearInterval(s2);
+      clearInterval(s3);
+      document.getElementById("btns").disabled= true;
+      document.getElementById("btnp").disabled= true;
+      alert("GAME OVER");
+      location.reload(true);
+   }
+}
+window.onload=init;    
+//-->    
+</script>
+    <br />
+<input id="btns" class="btn" value="Start" type="button" onclick="start1()"/>
+<input id="btnp" class="btn" value="Pause" type="button" onclick="pause()"/>    
+        <br /><div id="s"><font size="36">SCORE:<span id="score">00</span></font></div>
+    </center>
+</body>
+</html>
